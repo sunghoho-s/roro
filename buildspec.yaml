@@ -5,6 +5,7 @@ phases:
     commands:
       - ls -l
       - aws sts get-caller-identity
+      - aws assume-role --role-arn arn:aws:iam::654654492738:role/temp-s3-build-role --role-session-name s3-access-example
       - echo "Moving to Animated Landing Page Website Template directory..."
       - mv "Animated Landing Page Website Template" animated-landing-page
       - cd animated-landing-page
