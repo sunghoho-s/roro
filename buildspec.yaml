@@ -5,7 +5,14 @@ phases:
     commands:
       - ls -l
       - aws sts get-caller-identity
-      - aws sts assume-role --role-arn arn:aws:iam::654654492738:role/temp-s3-build-role --role-session-name s3-access-example | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)\n"'
+      - TEMP_CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::654654492738:role/temp-s3-build-role --role-session-name CodeBuildSession)
+      - echo "Temporary Credentials acquired."
+
+      - echo "Setting environment variables for temporary credentials..."
+      - export AWS_ACCESS_KEY_ID=$(echo "$TEMP_CREDENTIALS" | jq -r '.Credentials.AccessKeyId')
+      - export AWS_SECRET_ACCESS_KEY=$(echo "$TEMP_CREDENTIALS" | jq -r '.Credentials.SecretAccessKey')
+      - export AWS_SESSION_TOKEN=$(echo "$TEMP_CREDENTIALS" | jq -r '.Credentials.SessionToken')
+      - echo "Temporary credentials environment variables set."
       - aws sts get-caller-identity
       - echo "Moving to Animated Landing Page Website Template directory..."
       - mv "Animated Landing Page Website Template" animated-landing-page
