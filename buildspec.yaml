@@ -8,6 +8,7 @@ phases:
       - echo "Moving to Animated Landing Page Website Template directory..."
       - cd 'Animated Landing Page Website Template'
       - "cd \"Animated Landing Page Website Template\""
+      - cd Animated\ Landing\ Page\ Website\ Template
       - ls -l
       - AWS_REGION="ap-northeast-2" # 실제 AWS 리전으로 변경하세요 (예: ap-northeast-2)
       - S3_BUCKET_NAME="iwantgohomenow " # 실제 S3 버킷 이름으로 변경하세요
