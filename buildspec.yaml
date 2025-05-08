@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Current Directory: $(pwd)"
+      - echo "Moving to Animated Landing Page Website Template directory..."
+      - cd "Animated Landing Page Website Template"
+      - echo "Current Directory after moving: $(pwd)"
+      - AWS_REGION="your-aws-region" # 실제 AWS 리전으로 변경하세요 (예: ap-northeast-2)
+      - S3_BUCKET_NAME="your-s3-bucket-name" # 실제 S3 버킷 이름으로 변경하세요
+      - DISTRIBUTION_ID="your-cloudfront-distribution-id" # 실제 CloudFront 배포 ID로 변경하세요
+
+  build:
+    commands:
+      - echo "Uploading files to S3..."
+      - aws s3 sync . s3://$S3_BUCKET_NAME/ --delete
+
+  post_build:
+    commands:
+      - echo "Invalidating CloudFront cache..."
+      - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+      - echo "CloudFront cache invalidation initiated."
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: "Animated Landing Page Website Template"
+  discard-paths: yes
