@@ -3,7 +3,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - ls -l
       - echo "Current Directory: $(pwd)"
+      - aws sts get-caller-identity
+      - aws s3 ls
       - echo "Moving to Animated Landing Page Website Template directory..."
       - cd "Animated Landing Page Website Template"
       - echo "Current Directory after moving: $(pwd)"
