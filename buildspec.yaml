@@ -5,7 +5,7 @@ phases:
     commands:
       - ls -l
       - aws sts get-caller-identity
-      - TEMP_CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::654654492738:role/temp-s3-build-role --role-session-name CodeBuildSession)
+      - TEMP_CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::654654492738:role/service-role/abc-dev-s3-codebuilds-service-role --role-session-name CodeBuildSession)
       - echo "Temporary Credentials acquired."
       - echo "Setting environment variables for temporary credentials..."
       - export AWS_ACCESS_KEY_ID=$(echo "$TEMP_CREDENTIALS" | jq -r '.Credentials.AccessKeyId')
