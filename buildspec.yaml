@@ -16,6 +16,7 @@ phases:
   build:
     commands:
       - echo "Uploading files to S3..."
+      - echo $S3_BUCKET_NAME
       - aws s3 sync . s3://$S3_BUCKET_NAME/ 
 
   post_build:
