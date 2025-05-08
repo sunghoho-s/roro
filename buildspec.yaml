@@ -8,8 +8,8 @@ phases:
       - cd "Animated Landing Page Website Template"
       - echo "Current Directory after moving: $(pwd)"
       - AWS_REGION="ap-northeast-2" # 실제 AWS 리전으로 변경하세요 (예: ap-northeast-2)
-      - S3_BUCKET_NAME="abc-dev-roro-static-s3 " # 실제 S3 버킷 이름으로 변경하세요
-      - DISTRIBUTION_ID="E2YBK4I3DJPC0Z" # 실제 CloudFront 배포 ID로 변경하세요
+      - S3_BUCKET_NAME="iwantgohomenow " # 실제 S3 버킷 이름으로 변경하세요
+      - DISTRIBUTION_ID="E2AL4Q18FT3YH1" # 실제 CloudFront 배포 ID로 변경하세요
 
   build:
     commands:
